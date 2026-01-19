@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Партнёрская программа - Crosspostly</title>
+    <style>
+        :root {
+            --primary: #2196F3;
+            --primary-dark: #1976D2;
+            --success: #4CAF50;
+            --text: #333;
+            --text-light: #666;
+            --bg: #fafafa;
+            --border: #e0e0e0;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--text);
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .metric-item {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .case {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+        }
+
+        .case-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .case-stat {
+            text-align: center;
+        }
+
+        .case-stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .case-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .comparison-col {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+        }
+
+        .comparison-col.better {
+            border-color: var(--success);
+            background: rgba(76, 175, 80, 0.02);
+        }
+
+        .comparison-col h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .comparison-col ul {
+            list-style: none;
+        }
+
+        .comparison-col li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .comparison-col.better li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .comparison-col li:before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .cta-section {
+            background: var(--primary);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .process-step {
+            text-align: center;
+        }
+
+        .process-step-num {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .process-step h3 {
+            margin-bottom: 10px;
+        }
+
+        .faq {
+            margin: 40px 0;
+        }
+
+        .faq-item {
+            background: var(--white);
+            margin: 15px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: var(--white);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: var(--bg);
+        }
+
+        .faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .faq-item.active .faq-question {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .faq-item.active .faq-question::after {
+            content: "−";
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 20px;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--primary-dark);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .case-header {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <div class="header">
+        <div class="container">
+            <h1>Заработай с Crosspostly</h1>
+            <p>Автоматизированная публикация контента в 10+ платформ одним кликом</p>
+            <p style="font-size: 0.9rem; opacity: 0.9;">Партнёры зарабатывают в среднем на 40% больше при автоматизации распределения</p>
+            <div style="margin-top: 30px;">
+                <a href="#connect" class="btn">Подключиться</a>
+                <a href="#demo" class="btn btn-secondary" style="margin-left: 15px;">Смотреть демо</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- METRICS SECTION -->
+    <section>
+        <div class="container">
+            <h2>Результаты партнёров</h2>
+            <div class="metric">
+                <div class="metric-item">
+                    <div class="metric-value">+315%</div>
+                    <div class="metric-label">Среднее увеличение охвата</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">5 мин</div>
+                    <div class="metric-label">Времени на публикацию (вместо 40 мин)</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">240 ч</div>
+                    <div class="metric-label">Экономия времени в месяц</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">+85%</div>
+                    <div class="metric-label">Рост дохода от партнёров</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM SECTION -->
+    <section>
+        <div class="container">
+            <h2>В чём проблема сейчас?</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>⏱️ Потеря времени</h3>
+                    <p>Вручную публиковать во ВКонтакте, Instagram, TikTok, YouTube, Яндекс Дзен — это 40+ минут ежедневно</p>
+                </div>
+                <div class="card">
+                    <h3>📉 Упущенный доход</h3>
+                    <p>Контент публикуется с задержками, упускается прайм-тайм, теряются зрители и заработки</p>
+                </div>
+                <div class="card">
+                    <h3>🎯 Низкий охват</h3>
+                    <p>Без одновременной публикации и оптимизации под каждую платформу охват остаётся на минимуме</p>
+                </div>
+                <div class="card">
+                    <h3>😤 Выгорание</h3>
+                    <p>Однообразная работа истощает, отвлекает от создания качественного контента</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTION SECTION -->
+    <section>
+        <div class="container">
+            <h2>Как Crosspostly это решает</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>⚡ Публикуй за 5 минут</h3>
+                    <p>Создал контент → одна кнопка → везде одновременно. Готово за 5 минут вместо 40</p>
+                </div>
+                <div class="card">
+                    <h3>🚀 Максимальный охват</h3>
+                    <p>Автоматическая оптимизация размера видео, субтитров, хештегов под каждую платформу</p>
+                </div>
+                <div class="card">
+                    <h3>💰 Больше дохода</h3>
+                    <p>У партнёров с автоматизацией заработки растут на 40-85% благодаря правильной публикации</p>
+                </div>
+                <div class="card">
+                    <h3>🎨 Фокус на творчестве</h3>
+                    <p>Машина делает рутину — ты создаёшь качественный контент и зарабатываешь</p>
+                </div>
+                <div class="card">
+                    <h3>📊 Аналитика в один клик</h3>
+                    <p>Видь, где контент работает лучше всего, быстро адаптируй стратегию</p>
+                </div>
+                <div class="card">
+                    <h3>🤝 Поддержка 24/7</h3>
+                    <p>Наша команда помогает на каждом шаге: от настройки до масштабирования</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section>
+        <div class="container">
+            <h2>Кейсы партнёров</h2>
+            
+            <div class="case">
+                <h3>Кейс 1: Кулинарный канал «Быстрые рецепты»</h3>
+                <div class="case-header">
+                    <div class="case-stat">
+                        <div class="case-stat-value">+420%</div>
+                        <div class="case-stat-label">Рост охвата в месяц</div>
+                    </div>
+                    <div class="case-stat">
+                        <div class="case-stat-value">3-5 ч</div>
+                        <div class="case-stat-label">Сэкономлено в неделю</div>
+                    </div>
+                    <div class="case-stat">
+                        <div class="case-stat-value">+180K</div>
+                        <div class="case-stat-label">Новые подписчики</div>
+                    </div>
+                </div>
+                <div style="color: var(--text-light);">
+                    <strong>Что было:</strong> Публиковал видео рецептов вручную во ВКонтакте, TikTok и Instagram с разницей в 1-2 часа. Охват был низкий, зрители не видели контент в пик активности.<br><br>
+                    <strong>Что изменилось:</strong> С Crosspostly все видео выходят одновременно в оптимальное время для каждой платформы. Добавилась автоматическая оптимизация размеров и субтитров. Результат — охват вырос в 4+ раза, доход со спонсоров увеличился на 85%.
+                </div>
+            </div>
+
+            <div class="case">
+                <h3>Кейс 2: Фитнес-блогер @fitlife</h3>
+                <div class="case-header">
+                    <div class="case-stat">
+                        <div class="case-stat-value">+250%</div>
+                        <div class="case-stat-label">Охват за 3 месяца</div>
+                    </div>
+                    <div class="case-stat">
+                        <div class="case-stat-value">15 h/нед</div>
+                        <div class="case-stat-label">Экономия времени</div>
+                    </div>
+                    <div class="case-stat">
+                        <div class="case-stat-value">+72K</div>
+                        <div class="case-stat-label">Монетизация (купоны, товары)</div>
+                    </div>
+                </div>
+                <div style="color: var(--text-light);">
+                    <strong>Что было:</strong> 6 платформ, каждая требует разные размеры видео, тексты, хештеги. Время уходило на конвертацию и переделку контента.<br><br>
+                    <strong>Что изменилось:</strong> Crosspostly автоматически готовит видео под каждую платформу. Экономия 15+ часов в неделю использована на создание большего контента. Охват вырос, удалось подключить больше спонсоров и партнёров.
+                </div>
+            </div>
+
+            <div class="case">
+                <h3>Кейс 3: Гейминг-канал TWO GAMING</h3>
+                <div class="case-header">
+                    <div class="case-stat">
+                        <div class="case-stat-value">+520%</div>
+                        <div class="case-stat-label">Трафик из социалей</div>
+                    </div>
+                    <div class="case-stat">
+                        <div class="case-stat-value">1 клик</div>
+                        <div class="case-stat-label">Вместо 1+ часа работы</div>
+                    </div>
+                    <div class="case-stat">
+                        <div class="case-stat-value">+250K</div>
+                        <div class="case-stat-label">Подписчиков общей базе</div>
+                    </div>
+                </div>
+                <div style="color: var(--text-light);">
+                    <strong>Что было:</strong> Игровые видео нужно публиковать в соответствии с графиком стримов. Координация между 7 платформами была кошмаром.<br><br>
+                    <strong>Что изменилось:</strong> Автоматизированная публикация со своим графиком для каждой платформы. Crosspostly следит за пиком активности и публикует оптимально. Результат — видео из YouTube автоматически идёт в TikTok и Instagram, привлекая трафик туда, откуда ещё подписчиков нет.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VS COMPARISON -->
+    <section>
+        <div class="container">
+            <h2>Crosspostly vs. Ручная публикация</h2>
+            <div class="comparison">
+                <div class="comparison-col">
+                    <h3>Без Crosspostly</h3>
+                    <ul>
+                        <li>40+ минут на публикацию в день</li>
+                        <li>Упускается прайм-тайм</li>
+                        <li>Контент не оптимизирован под платформы</li>
+                        <li>Нет синхронной публикации</li>
+                        <li>Ручная конвертация видео</li>
+                        <li>Сложная аналитика</li>
+                        <li>Низкий охват в среднем</li>
+                        <li>Выгорание от однообразной работы</li>
+                    </ul>
+                </div>
+                <div class="comparison-col better">
+                    <h3>С Crosspostly ✓</h3>
+                    <ul>
+                        <li>5 минут на публикацию в день</li>
+                        <li>Автоматический выбор времени</li>
+                        <li>Автооптимизация под каждую платформу</li>
+                        <li>Одновременная публикация везде</li>
+                        <li>Автоконвертация видеоформатов</li>
+                        <li>Аналитика в один клик</li>
+                        <li>+315% рост охвата в среднем</li>
+                        <li>Фокус на творчестве, а не рутине</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section>
+        <div class="container">
+            <h2>Как это работает</h2>
+            <div class="process">
+                <div class="process-step">
+                    <div class="process-step-num">1</div>
+                    <h3>Подключи</h3>
+                    <p>Авторизуйся через социальные сети. Займёт 2 минуты</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-num">2</div>
+                    <h3>Настрой</h3>
+                    <p>Выбери платформы, время публикации, стиль контента</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-num">3</div>
+                    <h3>Публикуй</h3>
+                    <p>Загрузи контент → одна кнопка → везде одновременно</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-num">4</div>
+                    <h3>Анализируй</h3>
+                    <p>Смотри метрики, оптимизируй под то, что работает</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section>
+        <div class="container">
+            <h2>Модель сотрудничества</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Стартовый</h3>
+                    <p style="font-size: 2rem; color: var(--primary); margin: 20px 0; font-weight: 700;">499 ₽/мес</p>
+                    <ul style="list-style: none; margin: 20px 0;">
+                        <li>✓ 5 платформ</li>
+                        <li>✓ Неограниченно видео</li>
+                        <li>✓ Базовая аналитика</li>
+                        <li>✓ Email поддержка</li>
+                    </ul>
+                    <a href="#connect" class="btn" style="width: 100%; text-align: center;">Подключиться</a>
+                </div>
+                <div class="card" style="border-color: var(--success); box-shadow: 0 4px 16px rgba(76, 175, 80, 0.2);">
+                    <h3>⭐ Профессиональный</h3>
+                    <p style="font-size: 2rem; color: var(--success); margin: 20px 0; font-weight: 700;">1499 ₽/мес</p>
+                    <ul style="list-style: none; margin: 20px 0;">
+                        <li>✓ 10 платформ</li>
+                        <li>✓ Неограниченно видео</li>
+                        <li>✓ Расширенная аналитика</li>
+                        <li>✓ Приоритетная поддержка</li>
+                        <li>✓ Планировщик постов</li>
+                    </ul>
+                    <a href="#connect" class="btn" style="width: 100%; text-align: center;">Подключиться</a>
+                </div>
+                <div class="card">
+                    <h3>Энтерпрайз</h3>
+                    <p style="font-size: 1.5rem; color: var(--primary); margin: 20px 0; font-weight: 700;">По договору</p>
+                    <ul style="list-style: none; margin: 20px 0;">
+                        <li>✓ Неограниченно платформ</li>
+                        <li>✓ AI-оптимизация контента</li>
+                        <li>✓ Белые ярлыки</li>
+                        <li>✓ Дедикированный менеджер</li>
+                        <li>✓ API доступ</li>
+                    </ul>
+                    <a href="#connect" class="btn" style="width: 100%; text-align: center;">Обсудить</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <div class="container">
+            <h2>Частые вопросы</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <div class="faq-question">Насколько безопасно подключать свои аккаунты?</div>
+                    <div class="faq-answer">
+                        Мы используем OAuth 2.0 (та же технология, что и в Google, Facebook). Мы никогда не сохраняем пароли, только токены доступа. Ты можешь отозвать доступ в любой момент прямо в социальной сети.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Поддерживаются ли русские платформы (ВКонтакте, Яндекс Дзен)?</div>
+                    <div class="faq-answer">
+                        Да, полностью. Мы интегрированы с ВКонтакте, OK.ru, Яндекс Дзен, YouTube, TikTok, Instagram, Facebook и ещё 4+ платформами. Для каждой есть автооптимизация.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Можно ли публиковать в разное время для разных платформ?</div>
+                    <div class="faq-answer">
+                        Да, это одна из главных фишек. Каждой платформе можно установить свой график. Например, YouTube в 18:00, TikTok в 20:00, Instagram в 21:00. Crosspostly автоматически это координирует.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Сколько времени на настройку?</div>
+                    <div class="faq-answer">
+                        Первая настройка — 5-10 минут (подключение аккаунтов и выбор платформ). Дальше каждая публикация — 2-5 минут. Наша команда может помочь с расширенной настройкой бесплатно.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Что если я откажусь от услуги?</div>
+                    <div class="faq-answer">
+                        Можно отписаться в любой момент. Никаких штрафов, никаких обязательств. Отозови доступ — и мы сразу перестанем публиковать. Архив твоих постов останется у тебя.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">А что с копирайтингом и хештегами?</div>
+                    <div class="faq-answer">
+                        Можешь писать разные тексты для каждой платформы. Или использовать наш AI-помощник, который автоматически адаптирует текст под каждую платформу (оптимизирует длину, хештеги, стиль).
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Есть ли гарантия роста охвата?</div>
+                    <div class="faq-answer">
+                        Мы гарантируем только то, что твой контент будет публиковаться в оптимальное время и будет оптимизирован для каждой платформы. Рост охвата зависит от качества контента и ниши. Но наши партнёры видят +200-500% рост за счёт правильной публикации.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section" id="connect">
+        <div class="container">
+            <h2>Готов заработать больше?</h2>
+            <p>Присоединяйся к 150+ партнёрам, которые уже экономят время и увеличивают доход</p>
+            <div class="cta-buttons">
+                <a href="mailto:partners@crosspostly.com?subject=Хочу подключиться к программе партнёров" class="btn" style="margin: 0;">Написать нам</a>
+                <a href="#" class="btn btn-secondary" onclick="alert('Демо откроется скоро'); return false;" style="margin: 0;">Смотреть демо</a>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.9rem; opacity: 0.9;">Или добавь нас в Telegram: @crosspostly_support</p>
+        </div>
+    </section>
+
+    <footer style="background: #333; color: #fff; text-align: center; padding: 40px; margin-top: 0;">
+        <p>© 2024 Crosspostly. Все права защищены. | <a href="#" style="color: #fff; text-decoration: underline;">Политика конфиденциальности</a> | <a href="#" style="color: #fff; text-decoration: underline;">Условия использования</a></p>
+    </footer>
+
+    <script>
+        // FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const item = this.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
